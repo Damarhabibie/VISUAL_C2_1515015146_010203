@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="tes3" default="default" basedir=".">
-    <description>Builds, tests, and runs the project tes3.</description>
+<project name="VISUAL_C2_1515015146" default="default" basedir=".">
+    <description>Builds, tests, and runs the project VISUAL_C2_1515015146.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -58,7 +58,7 @@
 
     An example of overriding the target for project execution could look like this:
 
-        <target name="run" depends="tes3-impl.jar">
+        <target name="run" depends="VISUAL_C2_1515015146-impl.jar">
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>

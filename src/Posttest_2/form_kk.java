@@ -5,6 +5,7 @@
  */
 package Posttest_2;
 
+import Posttest_3.layout123;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -77,6 +78,7 @@ public class form_kk extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         reset = new javax.swing.JButton();
         register = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -330,12 +332,21 @@ public class form_kk extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Kembali");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(reset)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(register)
@@ -360,11 +371,13 @@ public class form_kk extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(reset)
-                    .addComponent(register))
+                    .addComponent(register)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
@@ -400,6 +413,7 @@ public class form_kk extends javax.swing.JFrame {
         
         FormOutput.foto.setIcon(this.foto.getIcon());
         tampil.setVisible(true);
+        this.dispose(); //untuk menyembunyikan frame form_kk
     }//GEN-LAST:event_registerActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
@@ -440,6 +454,12 @@ public class form_kk extends javax.swing.JFrame {
         }
         catch (IOException e){e.getMessage();}
     }//GEN-LAST:event_pilihActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new layout123().setVisible(true);//untuk kembali ke frame layout123
+        this.dispose();//untuk menyembunyikan frame form_kk
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     
@@ -485,6 +505,7 @@ public class form_kk extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel foto;
     private javax.swing.JComboBox goldar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

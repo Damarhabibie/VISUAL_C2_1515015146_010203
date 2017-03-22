@@ -6,6 +6,9 @@
 package Posttest_4;
 
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,7 @@ public class FormPelanggan extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     Float Diskon,Total,Harga;
+    char karakter1;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -92,17 +96,22 @@ public class FormPelanggan extends javax.swing.JFrame {
 
         jLabel3.setText("Berat Barang");
 
-        jnama.setText("jTextField1");
+        jnama.setText("Nama");
         jnama.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jnamaCaretUpdate(evt);
             }
         });
 
-        jnotelpon.setText("jTextField2");
+        jnotelpon.setText("No.Telepon");
         jnotelpon.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jnotelponCaretUpdate(evt);
+            }
+        });
+        jnotelpon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jnotelponKeyPressed(evt);
             }
         });
 
@@ -110,6 +119,11 @@ public class FormPelanggan extends javax.swing.JFrame {
         jberatbarang.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jberatbarangCaretUpdate(evt);
+            }
+        });
+        jberatbarang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jberatbarangKeyPressed(evt);
             }
         });
 
@@ -157,6 +171,10 @@ public class FormPelanggan extends javax.swing.JFrame {
 
         jLabel5.setText("Atur Diskon");
 
+        jdiskon.setMajorTickSpacing(10);
+        jdiskon.setPaintLabels(true);
+        jdiskon.setPaintTicks(true);
+        jdiskon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jdiskon.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jdiskonStateChanged(evt);
@@ -173,7 +191,7 @@ public class FormPelanggan extends javax.swing.JFrame {
         jLabel8.setText("Total Harga");
 
         jharga.setEditable(false);
-        jharga.setText("jTextField4");
+        jharga.setText("Total");
 
         buttonGroup1.add(jreguler);
         jreguler.setText("Reguler");
@@ -213,9 +231,9 @@ public class FormPelanggan extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlabeldiskon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jdiskon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlabeldiskon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdiskon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -226,7 +244,7 @@ public class FormPelanggan extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jharga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jproses.setText("Proses");
@@ -296,7 +314,7 @@ public class FormPelanggan extends javax.swing.JFrame {
                                     .addGap(37, 37, 37)
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -306,15 +324,15 @@ public class FormPelanggan extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jkeluar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(julang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jproses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(julang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(jproses, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jkeluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -345,6 +363,8 @@ public class FormPelanggan extends javax.swing.JFrame {
         jnotelpon.setText("");
         jberatbarang.setText("");
         jharga.setText("");
+        buttonGroup1.clearSelection();
+        jdiskon.setValue(50);
     }//GEN-LAST:event_julangActionPerformed
 
     private void jdiskonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jdiskonStateChanged
@@ -357,15 +377,18 @@ public class FormPelanggan extends javax.swing.JFrame {
         if(jreguler.isSelected()){
             Diskon = Float.valueOf(jdiskon.getValue());
             Total = 11500*(Float.valueOf(jberatbarang.getText()))-((Diskon/100)*11500);
-            Harga=Total;
+            Harga = Total;
         }
         else if (jexspress.isSelected()){
             Diskon = Float.valueOf(jdiskon.getValue());
             Total = 11500*(Float.valueOf(jberatbarang.getText()))-((Diskon/100)*11500);
-            Harga=1.5f*Total;
-            
+            Harga = 1.5f*Total;
         }
-            jharga.setText("Rp."+""+Harga);
+        else {
+            JOptionPane.showMessageDialog(null, "Pilih Jenis Jasa Terlebih Dahulu","PERINGATAN", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        jharga.setText("Rp."+""+Harga);
     }//GEN-LAST:event_jprosesActionPerformed
 
     private void jnamaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jnamaCaretUpdate
@@ -390,7 +413,7 @@ public class FormPelanggan extends javax.swing.JFrame {
 
     private void jberatbarangCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jberatbarangCaretUpdate
         // TODO add your handling code here:
-        if(jnama.getText().length() !=0 && jnotelpon.getText().length() !=0 && !jberatbarang.getText().matches("[0]")){
+        if(jnama.getText().length() !=0 && jnotelpon.getText().length() !=0 && !jberatbarang.getText().matches("[0]")&& jberatbarang.getText().length() !=0){
             jproses.setEnabled(true);
         }
         else{
@@ -430,6 +453,32 @@ public class FormPelanggan extends javax.swing.JFrame {
         // TODO add your handling code here:
         jkeluar.setBackground(Color.orange);
     }//GEN-LAST:event_jkeluarMouseExited
+
+    private void jnotelponKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jnotelponKeyPressed
+        // TODO add your handling code here:
+        jnotelpon.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char karakter1 = e.getKeyChar();
+                if(!((karakter1 >= '0') && (karakter1 <= '9')) || (karakter1 == '\b')){
+                e.consume();
+                }
+            }
+
+        });  
+    }//GEN-LAST:event_jnotelponKeyPressed
+
+    private void jberatbarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jberatbarangKeyPressed
+        // TODO add your handling code here:
+        jberatbarang.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e){
+                char karakter1 = e.getKeyChar();
+                if(!((karakter1 >= '0') && (karakter1 <= '9')) || (karakter1 == '\b')){
+                e.consume();
+                }
+            }
+
+        });
+    }//GEN-LAST:event_jberatbarangKeyPressed
 
     /**
      * @param args the command line arguments

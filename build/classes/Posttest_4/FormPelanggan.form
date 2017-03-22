@@ -52,7 +52,7 @@
                           </Group>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -66,16 +66,16 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jPanel2" max="32767" attributes="0"/>
                   <Component id="jPanel3" max="32767" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jkeluar" pref="34" max="32767" attributes="0"/>
-                  <Component id="julang" max="32767" attributes="0"/>
-                  <Component id="jproses" alignment="0" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="julang" alignment="1" pref="38" max="32767" attributes="0"/>
+                  <Component id="jproses" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jkeluar" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -190,7 +190,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jnama">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
+            <Property name="text" type="java.lang.String" value="Nama"/>
           </Properties>
           <Events>
             <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jnamaCaretUpdate"/>
@@ -198,10 +198,11 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jnotelpon">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField2"/>
+            <Property name="text" type="java.lang.String" value="No.Telepon"/>
           </Properties>
           <Events>
             <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jnotelponCaretUpdate"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jnotelponKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jberatbarang">
@@ -210,6 +211,7 @@
           </Properties>
           <Events>
             <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jberatbarangCaretUpdate"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jberatbarangKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -263,9 +265,9 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jlabeldiskon" max="32767" attributes="0"/>
-                      <Component id="jdiskon" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jlabeldiskon" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jdiskon" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -278,7 +280,7 @@
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jharga" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -290,6 +292,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSlider" name="jdiskon">
+          <Properties>
+            <Property name="majorTickSpacing" type="int" value="10"/>
+            <Property name="paintLabels" type="boolean" value="true"/>
+            <Property name="paintTicks" type="boolean" value="true"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jdiskonStateChanged"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jdiskonMousePressed"/>
@@ -308,7 +318,7 @@
         <Component class="javax.swing.JTextField" name="jharga">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="jTextField4"/>
+            <Property name="text" type="java.lang.String" value="Total"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jreguler">

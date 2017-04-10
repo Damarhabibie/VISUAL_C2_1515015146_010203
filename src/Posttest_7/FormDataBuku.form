@@ -235,6 +235,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -245,6 +248,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="search1">
           <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="search1CaretUpdate"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="search1KeyTyped"/>
           </Events>
         </Component>
@@ -256,10 +260,11 @@
         <Component class="javax.swing.JComboBox" name="combosearch">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Judul"/>
-                <StringItem index="1" value="Penulis"/>
-                <StringItem index="2" value="Harga"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Id"/>
+                <StringItem index="1" value="Judul"/>
+                <StringItem index="2" value="Penulis"/>
+                <StringItem index="3" value="Harga"/>
               </StringArray>
             </Property>
           </Properties>

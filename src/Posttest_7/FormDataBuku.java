@@ -26,6 +26,7 @@ public class FormDataBuku extends javax.swing.JFrame {
     
     private void InitTable(){
         model = new DefaultTableModel();
+        model.addColumn("ID BUKU");
         model.addColumn("JUDUL");
         model.addColumn("PENULIS");
         model.addColumn("HARGA");
@@ -33,18 +34,18 @@ public class FormDataBuku extends javax.swing.JFrame {
         jTable1.setModel(model);
     }
     
-    private boolean validasi(String judul){
-        try{
-            stt = con.createStatement();
-            String sql = "Select * from buku where judul='"+judul+"'";
-            rss = stt.executeQuery(sql);
-            if(rss.next())
-                return true;
-            else
-                return false;
+    private boolean validasidatasama(String judul,String penulis){//membuat method dengan parameter judul dan penulis di didalamnya
+        try{//mencari kesalahan di query di bawah ini
+            stt = con.createStatement();//membuat koneksi dengan database
+            String sql = "Select * from buku where judul='"+judul+"' and penulis='"+penulis+"';";//query untuk melihat data judul dan penulis yang sesuai
+            rss = stt.executeQuery(sql);//mengeksekusi query dengan data yang telah ada di database
+            if(rss.next())//jika ada data yang sama
+                return true;//maka benar 
+            else//jika tidak ada data yang sama
+                return false;//maka salah
             
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
+        }catch(SQLException e){//menangkap kesalahan yang ada di query diatas
+            System.out.println(e.getMessage());//menampilkan pesan exception yang didapatkan di atas
             return false;
         }
     }
@@ -71,11 +72,30 @@ public class FormDataBuku extends javax.swing.JFrame {
             stt = con.createStatement();
             rss = stt.executeQuery(sql);
             while(rss.next()){
-                Object[] o = new Object[3];
-                o[0] = rss.getString("judul");
-                o[1] = rss.getString("penulis");
-                o[2] = rss.getInt("harga");
+                Object[] o = new Object[4];
+                o[0] = rss.getString("id");
+                o[1] = rss.getString("judul");
+                o[2] = rss.getString("penulis");
+                o[3] = rss.getInt("harga");
                 model.addRow(o);
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+        private void PencarianData(String by,String cari){
+        try{
+            String sql= "SELECT * FROM buku where "+by+" like'%"+cari+"%';";
+            stt = con.createStatement();
+            rss = stt.executeQuery(sql);
+            while(rss.next()){
+                Object[] data = new Object[4];
+                data[0] = rss.getString("id");
+                data[1] = rss.getString("judul");
+                data[2] = rss.getString("penulis");
+                data[3] = rss.getInt("harga");
+                model.addRow(data);
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -88,40 +108,34 @@ public class FormDataBuku extends javax.swing.JFrame {
                     "INSERT INTO BUKU VALUES (NULL,'"+judul+"','"+penulis+"',"+harga+")";
             stt = con.createStatement();
             stt.executeUpdate(sql);
-            model.addRow(new Object[]{judul,penulis,harga});
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
     }
     
-    private void HapusData(){
+    public boolean UbahData(String id,String judul,String penulis,String harga){
         try{
-            String sql= "delete FROM buku where jTable1.getSelectedRow()";
+            String sql = "UPDATE buku set judul ='"+judul
+                    +"',penulis='"+penulis+"',harga="+harga
+                    +" Where id="+id+";";
             stt = con.createStatement();
-            rss = stt.executeQuery(sql);
-            while(rss.next()){
-                int baris=jTable1.getSelectedRow();
-                model.removeRow(baris);
-            }
+            stt.executeUpdate(sql);
+            return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
     
-    private void UpdateData(String judul,String penulis,String harga){
+    public boolean HapusData(String id){
         try{
-            String sql= "INSERT INTO BUKU VALUES (NULL,'"+judul+"','"+penulis+"',"+harga+")";
+            String sql = "Delete From buku where id="+id+";";
             stt = con.createStatement();
-            rss = stt.executeQuery(sql);
-            while(rss.next()){
-                int baris=jTable1.getSelectedRow();
-                jTable1.setValueAt(txtjudul.getText(),baris,0);
-                jTable1.setValueAt(combopenulis.getSelectedItem(),baris,1);
-                jTable1.setValueAt(txtharga.getText(),baris,2);
-                model.addRow(new Object[]{judul,penulis,harga});
-            }
+            stt.executeUpdate(sql);
+            return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
     /**
@@ -211,10 +225,20 @@ public class FormDataBuku extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setText("Search:");
 
+        search1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                search1CaretUpdate(evt);
+            }
+        });
         search1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 search1KeyTyped(evt);
@@ -223,7 +247,7 @@ public class FormDataBuku extends javax.swing.JFrame {
 
         jLabel6.setText("By:");
 
-        combosearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Judul", "Penulis", "Harga" }));
+        combosearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Judul", "Penulis", "Harga" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -327,34 +351,40 @@ public class FormDataBuku extends javax.swing.JFrame {
         String judul = txtjudul.getText();
         String penulis = combopenulis.getSelectedItem().toString();
         String harga = txtharga.getText();
-        if(validasi(judul)){
-            JOptionPane.showMessageDialog(null, "judul sudah ada");
+        if(validasidatasama(judul,penulis)){//memanggil method validasidatasama untuk mengecek apakah ada judul dengan penulis yang sama
+            JOptionPane.showMessageDialog(null, "data sudah ada");//menampilkan output data sudah ada
         }
-        else{
-        TambahData(judul,penulis,harga);
+        else{//jika tidak
+        TambahData(judul,penulis,harga);//maka akan menampilkan seperti biasa
+        InitTable(); TampilData();
+        JOptionPane.showMessageDialog(null, "Berhasil Simpan Data");
         }
     }//GEN-LAST:event_simpanActionPerformed
 
     private void ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahActionPerformed
         // TODO add your handling code here:
-                int baris=jTable1.getSelectedRow();
-        
-        // try{
-        jTable1.setValueAt(txtjudul.getText(),baris,0);
-        jTable1.setValueAt(combopenulis.getSelectedItem(),baris,1);
-        jTable1.setValueAt(txtharga.getText(),baris,2);
-        //}catch(Exception e){
-        
-        JOptionPane.showMessageDialog(this, "data telah di update");
+        int baris=jTable1.getSelectedRow();
+        String id = jTable1.getValueAt(baris, 0).toString();
+        String judul = txtjudul.getText();
+        String penulis = combopenulis.getSelectedItem().toString();
+        String harga = txtharga.getText();
+        if(UbahData(id,judul,penulis,harga))
+            JOptionPane.showMessageDialog(null, "Berhasil Ubah Data");
+        else
+            JOptionPane.showConfirmDialog(null, "Gagal Ubah Data");
+        InitTable();TampilData();
     }//GEN-LAST:event_ubahActionPerformed
 
     private void hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusActionPerformed
         // TODO add your handling code here:
-        int pilih = JOptionPane.showConfirmDialog(this,"Ingin Hapus","Confirm Hapus",JOptionPane.INFORMATION_MESSAGE,3);
-        if(pilih == JOptionPane.YES_OPTION){
+        int baris = jTable1.getSelectedRow();
+        String id = jTable1.getValueAt(baris, 0).toString();
+        if(HapusData(id))
+            JOptionPane.showMessageDialog(null, "Berhasil hapus Data");
+        else
+            JOptionPane.showMessageDialog(null, "gagal hapus Data");
         
-        HapusData();
-        }
+        InitTable();TampilData();
     }//GEN-LAST:event_hapusActionPerformed
 
     private void keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarActionPerformed
@@ -363,27 +393,49 @@ public class FormDataBuku extends javax.swing.JFrame {
 
     private void search1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search1KeyTyped
         // TODO add your handling code here:
-        model.getDataVector().removeAllElements();
-        model.fireTableDataChanged(); 
-        String caridengan = combosearch.getSelectedItem().toString();
-        try { //mencoba program di dalam fungsi try catch
-           String sql="select * from buku where "+caridengan+" like '%"+search1.getText()+"%'"; //adalah action query untuk mencari di database buku dengan mengacu pada inputan di TextField Search
-           stt = con. createStatement();
-           rss = stt. executeQuery(sql);
-           ResultSet rss=stt.executeQuery(sql);
-            while (rss.next()) {
-                Object[] o=new Object[3];
-                o[0]=rss.getString("JUDUL");
-                o[1]=rss.getString("PENULIS");
-                o[2]=rss.getString("HARGA");
-                model.addRow(o);//menampilkan row atau baris
-            }
-            stt.close();
-            rss.close();
-        }catch(SQLException e) { //untuk menangkap kesalahan yang mungkin terjadi pada program di dalam try catch
-            System.out.println("Terjadi kesalahan"); //mengoutputkan "Terjadi Kesalahan"
-        }
+//        model.getDataVector().removeAllElements();
+//        model.fireTableDataChanged(); 
+//        String caridengan = combosearch.getSelectedItem().toString();
+//        try { //mencoba program di dalam fungsi try catch
+//           String sql="select * from buku where "+caridengan+" like '%"+search1.getText()+"%'"; //adalah action query untuk mencari di database buku dengan mengacu pada inputan di TextField Search
+//           stt = con. createStatement();
+//           rss = stt. executeQuery(sql);
+//           ResultSet rss=stt.executeQuery(sql);
+//            while (rss.next()) {
+//                Object[] o=new Object[3];
+//                o[0]=rss.getString("JUDUL");
+//                o[1]=rss.getString("PENULIS");
+//                o[2]=rss.getString("HARGA");
+//                model.addRow(o);//menampilkan row atau baris
+//            }
+//            stt.close();
+//            rss.close();
+//        }catch(SQLException e) { //untuk menangkap kesalahan yang mungkin terjadi pada program di dalam try catch
+//            System.out.println("Terjadi kesalahan"); //mengoutputkan "Terjadi Kesalahan"
+//        }
     }//GEN-LAST:event_search1KeyTyped
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    // TODO add your handling code here:
+        int baris = jTable1.getSelectedRow();
+        
+     
+        txtjudul.setText(jTable1.getValueAt(baris, 1).toString());
+        combopenulis.setSelectedItem(jTable1.getValueAt(baris, 2).toString());
+        txtharga.setText(jTable1.getValueAt(baris, 3).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void search1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_search1CaretUpdate
+        // TODO add your handling code here:
+        InitTable();
+        if(search1.getText().length()==0){
+            TampilData();
+        }else{
+            PencarianData(combosearch.getSelectedItem().toString(),
+                    search1.getText());
+        
+    }
+    }//GEN-LAST:event_search1CaretUpdate
 
     /**
      * @param args the command line arguments

@@ -40,13 +40,13 @@ public class FormDataBuku extends javax.swing.JFrame {
             String sql = "Select * from buku where judul='"+judul+"' and penulis='"+penulis+"';";//query untuk melihat data judul dan penulis yang sesuai
             rss = stt.executeQuery(sql);//mengeksekusi query dengan data yang telah ada di database
             if(rss.next())//jika ada data yang sama
-                return true;//maka benar 
+                return true;//mengembalikan nilai benar
             else//jika tidak ada data yang sama
-                return false;//maka salah
+                return false;//mengembalikan nilai salah
             
         }catch(SQLException e){//menangkap kesalahan yang ada di query diatas
             System.out.println(e.getMessage());//menampilkan pesan exception yang didapatkan di atas
-            return false;
+            return false;//mengembalikan nilai salah
         }
     }
     
@@ -368,11 +368,14 @@ public class FormDataBuku extends javax.swing.JFrame {
         String judul = txtjudul.getText();
         String penulis = combopenulis.getSelectedItem().toString();
         String harga = txtharga.getText();
-        if(UbahData(id,judul,penulis,harga))
-            JOptionPane.showMessageDialog(null, "Berhasil Ubah Data");
-        else
-            JOptionPane.showConfirmDialog(null, "Gagal Ubah Data");
-        InitTable();TampilData();
+        if(validasidatasama(judul,penulis)){//memanggil method validasidatasama sekali lagi
+            JOptionPane.showMessageDialog(null, "Data Sudah Ada");//menampilkan output data sudah ada jika ada data judul dengan penulis yang sama
+            InitTable();TampilData();//menampilkan kembali data 
+        }
+        else if(UbahData(id,judul,penulis,harga)){//mmegubah data seperti biasa
+            JOptionPane.showMessageDialog(null, "Berhasil Ubah Data");//menampilkan output data berhasil di ubah
+            InitTable();TampilData();//menampilkan kembali data 
+        }
     }//GEN-LAST:event_ubahActionPerformed
 
     private void hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusActionPerformed
